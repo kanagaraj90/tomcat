@@ -21,13 +21,9 @@ pipeline{
         }
         stage('Deploy Stage') {
           steps{
-              script {
-                    dir('helm') {
-                     withCredentials([aws(credentialsId: "awsCred", region: "ap-south-1")]) {
-                        sh 'aws eks --region ap-south-1 update-kubeconfig --name eks-cluster'
-                        sh 'helm -install helm helm -n dev'
-                    }
-                }
+                withCredentials([aws(credentialsId: "awsCred", region: "ap-south-1")]) {
+                    sh 'aws eks --region ap-south-1 update-kubeconfig --name eks-cluster'
+                    sh 'helm -install nginx-deploy-project helm -n dev'
               }
           } 
         }

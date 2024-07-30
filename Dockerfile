@@ -1,9 +1,13 @@
-FROM ubuntu:latest as stage1
-RUN apt-get update && apt-get install git -y
-RUN git clone https://github.com/fatimatabassum05/java-tomcat-maven-example.git
-WORKDIR /java-tomcat-maven-example/app
+FROM maven:amazoncorretto as builder
 
-FROM nginx:latest
-COPY --from=stage1 /java-tomcat-maven-example/app/nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
-CMD ["nginx", "-g", "deamon off;"]
+WORKDIR /app
+
+COPY . .
+
+RUN mvn clean install
+
+FROM artisantek/tomcat:1
+
+COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps
+
+CMD ["catalina.sh", "run"]

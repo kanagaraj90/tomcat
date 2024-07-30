@@ -25,8 +25,6 @@ pipeline{
                     dir('helm') {
                      withCredentials([aws(credentialsId: "awsCred", region: "ap-south-1")]) {
                         sh 'aws eks --region ap-south-1 update-kubeconfig --name eks-cluster'
-                        sh 'helm repo add stable https://charts.helm.sh/stable'
-                        sh 'helm repo update'
                         sh 'helm -install helm helm -n dev'
                     }
                 }

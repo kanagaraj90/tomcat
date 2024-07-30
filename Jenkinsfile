@@ -24,7 +24,7 @@ pipeline{
             withAwsCredentials('awsCred') {
                 sh 'aws configure set aws_access_key_id ${awsAccessKey}'
                 sh 'aws configure set aws_secret_access_key ${awsSecretKey}'
-            withCredentials('kubeconfig'){ 
+            withCredentials('kubeconfig') { 
                 sh 'aws eks --region ap-south-1 update-kubeconfig --name eks-cluster'
                 sh 'helm install helm helm -n dev'
                 }

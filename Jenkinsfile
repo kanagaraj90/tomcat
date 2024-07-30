@@ -21,8 +21,7 @@ pipeline{
         }
         stage('Deploy Stage') {
           steps{
-                withCredentials([file(credentialsId: "kubeconfig", variable: 'KUBECONFIG_FILE')]) {
-                    export KUBECONFIG=${KUBECONFIG_FILE}
+                withCredentials([aws(credentialsId: "awsCred", region: "ap-south-1")]) {
                     sh 'aws eks --region ap-south-1 update-kubeconfig --name eks-cluster'
                     sh 'kubectl get nodes'
               }

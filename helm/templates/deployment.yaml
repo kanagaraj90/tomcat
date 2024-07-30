@@ -13,8 +13,19 @@ spec:
       labels:
         app: {{ .Values.deployment.name }}
     spec:
+      volumes:
+      - name: webdata
+        emptyDir: {}
+      initContainers:
+      - name: web-content
+        image: busybox
+        volumeMounts:
+        - name: webdata
+          mountPath: "/webdata"
+        command: ["/bin/sh", "-c", 'echo "<h1><font color=Blue>BLUE APP</font></h1>" > /webdata/index.html']
       containers:
-        - name: {{ .Values.deployment.name }}
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          ports:
-            - containerPort: {{ .Values.image.containerPort }}
+      - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        name: {{ .Values.deployment.name }}
+        volumeMounts:
+        - name: webdata
+          mountPath: "/usr/share/nginx/html"

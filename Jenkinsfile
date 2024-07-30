@@ -6,7 +6,7 @@ pipeline{
     stages{
        stage('Git Checkout Stage'){
             steps{
-                git branch: 'main', url: 'https://github.com/fatimatabassum05/java-example.git'
+                git branch: 'main', url: 'https://github.com/fatimatabassum05/java-tomcat-maven-example.git'
             }
          }        
         stage('Build docker Image'){
@@ -23,7 +23,7 @@ pipeline{
           steps{
                 withCredentials([aws(credentialsId: "awsCred", region: "ap-south-1")]) {
                     sh 'aws eks --region ap-south-1 update-kubeconfig --name eks-cluster'
-                    sh 'cd helm/'
+                    sh 'kubectl get nodes'
               }
           } 
         }

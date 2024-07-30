@@ -1,12 +1,11 @@
 deployment:
-  name: tomcat-deploy-project
+  name: nginx-deploy-project
   replicaCount: 1
 image:
   repository: fatimatabassum/fatima12
   tag: IMAGE_TAG
-  containerPort: 8080
+  containerPort: 80
 service:
-  type: NodePort
-  clusterIPPort: 8080
-  nodePort: 31000
+  type: ClusterIP
+  clusterIPPort: 80
 namespace: dev

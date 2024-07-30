@@ -1,11 +1,18 @@
 deployment:
-  name: nginx-deploy-project
+  name: tomcat-deploy-project
   replicaCount: 1
 image:
   repository: fatimatabassum/fatima12
   tag: IMAGE_TAG
   containerPort: 80
-service:
-  type: ClusterIP
-  clusterIPPort: 80
 namespace: dev
+service:
+  type: LoadBalancer
+  clusterIPPort: 8080
+ingress:
+  enabled: true
+  name: tomcat-deploy-project-ingress
+  host: ""  
+  path: /
+  backendServiceName: tomcat-deploy-project-svc
+  backendServicePort: 8080

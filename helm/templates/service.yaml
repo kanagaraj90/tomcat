@@ -10,4 +10,3 @@ spec:
   ports:
   - port: {{ .Values.service.clusterIPPort }}
     targetPort: {{ .Values.image.containerPort }}
-    nodePort: {{ .Values.service.nodePort }}

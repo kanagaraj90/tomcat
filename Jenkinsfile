@@ -1,5 +1,5 @@
 pipeline{
-    agent {label 'docker_node_new'}
+    agent any
     environment{
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
@@ -21,7 +21,8 @@ pipeline{
         }
         stage('Deploy Stage') {
           steps{
-                withCredentials([aws(credentialsId: "awsCred", region: "ap-south-1")]) {
+                withCredentials([file(credentialsId: "kubeconfig", variable: 'KUBECONFIG_FILE')]) {
+                    export KUBECONFIG=${KUBECONFIG_FILE}
                     sh 'aws eks --region ap-south-1 update-kubeconfig --name eks-cluster'
                     sh 'kubectl get nodes'
               }

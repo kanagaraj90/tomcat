@@ -25,7 +25,7 @@ pipeline{
                 sh 'aws eks --region ap-south-1 update-kubeconfig --name eks-cluster'
                 sh 'helm repo add stable https://charts.helm.sh/stable'
                 sh 'helm repo update'
-                sh 'helm upgrade --install helm java-tomcat-maven-example/helm -n dev'
+                sh 'helm upgrade --install helm ./helm -n dev'
                 }
           } 
         }

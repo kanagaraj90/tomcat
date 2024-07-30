@@ -23,7 +23,6 @@ pipeline{
           steps{
                 withCredentials([aws(credentialsId: "awsCred", region: "ap-south-1")]) {
                     sh 'aws eks --region ap-south-1 update-kubeconfig --name eks-cluster'
-                    sh 'kubectl get nodes'
                     sh 'helm upgrade --install nginx-deploy-project ./helm -n dev'
               }
           } 

@@ -1,5 +1,5 @@
 apiVersion: v2
-name: nginx-deploy-project
+name: tomcat-deploy-project
 description: A Helm chart for Project
 
 type: application

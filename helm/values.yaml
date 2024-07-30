@@ -3,7 +3,7 @@ deployment:
   replicaCount: 1
 image:
   repository: fatimatabassum/fatima12
-  tag: ${BUILD_NUMBER}
+  tag: IMAGE_TAG
   containerPort: 8080
 service:
   type: NodePort

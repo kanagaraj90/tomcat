@@ -4,9 +4,9 @@ metadata:
   name: {{ .Values.deployment.name }}-svc
   namespace: {{ .Values.namespace }}
 spec:
-  type: NodePort
+  type: {{ .Values.service.type }}
   selector:
     app: {{ .Values.deployment.name }}
   ports:
-  - port: {{ .Values.service.clusterIPPort }}
-    targetPort: {{ .Values.image.containerPort }}
+    - port: {{ .Values.service.clusterIPPort }}
+      targetPort: {{ .Values.image.containerPort }}

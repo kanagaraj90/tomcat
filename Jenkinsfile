@@ -21,7 +21,7 @@ pipeline{
         }
         stage('Deploy Stage') {
           steps{
-             withCredentials([file(credentialId: 'kubeconfig')]) {
+             withCredentials([aws(credentialsId: "awsCred", region: "ap-south-1")]) {
                 sh 'aws eks --region ap-south-1 update-kubeconfig --name eks-cluster'
                 sh 'helm install helm helm -n dev'
                 }

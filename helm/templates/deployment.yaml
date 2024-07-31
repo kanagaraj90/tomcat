@@ -12,6 +12,7 @@ spec:
     metadata:
       labels:
         app: {{ .Values.deployment.name }}
+    spec:
       containers:
         - name: {{ .Values.deployment.name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}

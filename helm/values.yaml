@@ -4,7 +4,7 @@ deployment:
 image:
   repository: fatimatabassum/fatima12
   tag: IMAGE_TAG
-  containerPort: 80
+  containerPort: 8080
 namespace: dev
 service:
   type: LoadBalancer
